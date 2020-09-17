@@ -1,0 +1,14 @@
+UTCS_OPT=-O3 make the_kernel
+
+test -f $1.img || (test -f $1.src && cp $1.src $1.img) || (dd if=/dev/zero of=$1.img bs=1024 count=8323 > /dev/null 2>&1)
+
+
+
+qemu-system-i386 \
+    -nographic\
+    -smp 1 \
+    -monitor none \
+    -drive file=kernel/kernel.img,index=0,media=disk,format=raw \
+    -drive file=$*.img,index=3,media=disk,format=raw \
+    -device isa-debug-exit,iobase=0xf4,iosize=0x04 \
+    
