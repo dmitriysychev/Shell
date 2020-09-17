@@ -1,0 +1,2 @@
+*** This line should not print to the console
+*** Fail test if it does
